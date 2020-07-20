@@ -7,16 +7,15 @@ import java.util.GregorianCalendar;
 
 public class Filter {
 
-    private static final int STEP_DAY = 0;
-    private static final int STEP_MONTH = 1;
-    private static final int STEP_YEAR = 2;
+    public static final int STEP_DAY = 0;
+    public static final int STEP_MONTH = 1;
+    public static final int STEP_YEAR = 2;
 
     private int step;
     private Date from;
     private Date to;
 
     public Filter(){
-
         this(STEP_MONTH);
     }
 

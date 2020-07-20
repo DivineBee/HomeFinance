@@ -5,7 +5,9 @@ import java.util.HashMap;
 final public class Text {
     private static final HashMap<String, String> data = new HashMap<>();
     public static String getItem(String key){
-        return data.get(key);
+        if (data.containsKey(key)) return data.get(key);
+        System.out.println("Такого ключа в Text не существует!"); //for testing
+        return "";
     }
 
     public static String[] getMonths(){
@@ -54,5 +56,8 @@ final public class Text {
         data.put("RATE_INCORRECT", "Некорректное значение курса!");
         data.put("AMOUNT_FORMAT", "Некорректный формат суммы!");
         data.put("NO_BASE_CURRENCY", "Необходима базовая валюта! Установите параметр базовой валюты.");
+
+        data.put("YES", "Да");
+        data.put("NO", "Нет");
     }
 }
