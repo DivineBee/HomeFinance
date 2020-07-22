@@ -1,5 +1,7 @@
 package homefinance.model;
 
+import homefinance.saveload.SaveData;
+
 abstract public class Common {
 
     public Common(){}
@@ -8,7 +10,7 @@ abstract public class Common {
         return null;
     }
 
-    public void postAdd(){ }
-    public void postEdit(){ }
-    public void postDelete(){ }
+    public void postAdd(SaveData sd){ }
+    public void postEdit(SaveData sd){ }
+    public void postDelete(SaveData sd){ }
 }

@@ -1,6 +1,7 @@
 package homefinance.model;
 
 import homefinance.exception.ModelException;
+import homefinance.saveload.SaveData;
 
 import java.util.List;
 import java.util.Objects;
@@ -67,6 +68,7 @@ public class Account extends Common{
     public String getValueForComboBox(){
         return title;
     }
+
     public void setAmountForTransactionAndTransfers(List<Transaction> transactions, List<Transfer> transfers){
         this.amount = startAmount;
         for (Transaction transaction : transactions){
@@ -82,5 +84,21 @@ public class Account extends Common{
                 this.amount += transfer.getToAmount();
             }
         }
+    }
+
+    @Override
+    public void postAdd(SaveData sd){
+        setAmountForTransactionAndTransfers(sd.getTransactions(), sd.getTransfers());
+    }
+
+    @Override
+    public void postEdit(SaveData sd){
+        for (Transaction t : sd.getTransactions())
+            if (t.getAccount().equals(sd.getOldCommon())) t.setAccount(this);
+        for (Transfer t : sd.getTransfers()) {
+            if (t.getFromAccount().equals(sd.getOldCommon())) t.setFromAccount(this);
+            if (t.getToAccount().equals(sd.getOldCommon())) t.setToAccount(this);
+        }
+        setAmountForTransactionAndTransfers(sd.getTransactions(), sd.getTransfers());
     }
 }

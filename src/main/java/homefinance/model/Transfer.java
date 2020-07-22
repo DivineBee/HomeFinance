@@ -1,6 +1,7 @@
 package homefinance.model;
 
 import homefinance.exception.ModelException;
+import homefinance.saveload.SaveData;
 
 import java.util.Date;
 
@@ -98,5 +99,25 @@ public class Transfer extends Common {
                 ", notes='" + notes + '\'' +
                 ", date=" + date +
                 '}';
+    }
+
+    @Override
+    public void postAdd(SaveData sd){
+        setAmounts(sd);
+    }
+
+    @Override
+    public void postEdit(SaveData sd){
+        setAmounts(sd);
+    }
+
+    @Override
+    public void postDelete(SaveData sd){
+        setAmounts(sd);
+    }
+
+    private void setAmounts(SaveData sd){
+        for (Account a : sd.getAccounts())
+            a.setAmountForTransactionAndTransfers(sd.getTransactions(), sd.getTransfers());
     }
 }

@@ -1,6 +1,7 @@
 package homefinance.model;
 
 import homefinance.exception.ModelException;
+import homefinance.saveload.SaveData;
 
 import javax.print.DocFlavor;
 import java.util.Objects;
@@ -46,5 +47,11 @@ public class Article extends Common{
     @Override
     public String getValueForComboBox(){
         return title;
+    }
+
+    @Override
+    public void postEdit(SaveData sd){
+        for(Transaction t : sd.getTransactions())
+            if (t.getArticle().equals(sd.getOldCommon())) t.setArticle(this);
     }
 }
